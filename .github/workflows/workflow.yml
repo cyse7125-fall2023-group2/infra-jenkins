@@ -1,4 +1,4 @@
-name: Test format on PR
+name: Test
 
 on:
   pull_request:
