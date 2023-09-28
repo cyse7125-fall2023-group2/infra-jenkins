@@ -26,3 +26,11 @@ variable "volume_size" {
   type = number
 }
 
+variable "zone_id" {
+  type = string
+}
+
+variable "rec_name" {
+  type = string
+}
+

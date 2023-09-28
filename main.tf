@@ -34,12 +34,14 @@ module "jenkins_server" {
   sec_id            = module.sec_group_setup.sec_group_id
   volume_size       = var.volume_size
   volume_type       = var.volume_type
-}
-
-module "elastic_ip" {
-  source = "./modules/ElasticIP"
-
-  jenkins_server_id = module.jenkins_server.jenkins_server_id
   zone_id           = var.zone_id
   rec_name          = var.rec_name
 }
+
+# module "elastic_ip" {
+#   source = "./modules/ElasticIP"
+
+#   jenkins_server_id = module.jenkins_server.jenkins_server_id
+#   zone_id           = var.zone_id
+#   rec_name          = var.rec_name
+# }
