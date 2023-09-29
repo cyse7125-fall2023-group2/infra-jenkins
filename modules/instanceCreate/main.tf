@@ -28,7 +28,28 @@ resource "aws_instance" "jenkins_server" {
               EOF
 }
 
-output "jenkins_server_id" {
-  value = aws_instance.jenkins_server.id
+data "aws_eip" "jenkins_eip" {
+  filter {
+    name   = "tag:name"
+    values = ["jenkins"]
+  }
 }
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.jenkins_server.id
+  allocation_id = data.aws_eip.jenkins_eip.id
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_route53_record" "a_record" {
+  zone_id = var.zone_id
+  name    = var.rec_name
+  type    = "A"
+  ttl     = 60
+  records = [aws_eip_association.eip_assoc.public_ip]
+}
+
 

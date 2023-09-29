@@ -18,12 +18,12 @@ resource "aws_security_group" "application" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
-    description     = "Jenkins ingress"
-    from_port       = 2080
-    to_port         = 2080
-    protocol        = "tcp"
+    description = "Jenkins ingress"
+    from_port   = 2080
+    to_port     = 2080
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

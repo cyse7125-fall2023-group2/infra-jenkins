@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "internet-gateway" {
   }
 }
 
-//-----------Public Subnet----------------
+//-----------Public Subnet---------------
 
 resource "aws_subnet" "public-subnet" {
   count                   = var.subnet_count
