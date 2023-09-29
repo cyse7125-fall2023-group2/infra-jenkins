@@ -33,4 +33,3 @@ variable "zone_id" {
 variable "rec_name" {
   type = string
 }
-

@@ -23,8 +23,16 @@ resource "aws_instance" "jenkins_server" {
               #!/bin/bash
               sudo systemctl enable jenkins
               sudo systemctl start jenkins
+              sudo mv /etc/caddy/Caddyfile /opt/
+              sudo touch /etc/caddy/Caddyfile
+              sudo chown -R root:ubuntu /etc/caddy/Caddyfile 
+              sudo chmod -R 664 /etc/caddy/Caddyfile 
+              sudo echo ${var.rec_name} { >> /etc/caddy/Caddyfile
+              sudo echo reverse_proxy localhost:8080 >> /etc/caddy/Caddyfile
+              sudo echo } >> /etc/caddy/Caddyfile
+              caddy fmt --overwrite /etc/caddy/Caddyfile 
+              sudo systemctl stop caddy
               sudo systemctl start caddy
-              sudo caddy reverse-proxy --from :2080 --to :8080
               EOF
 }
 
