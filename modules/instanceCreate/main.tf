@@ -21,6 +21,9 @@ resource "aws_instance" "jenkins_server" {
 
   user_data = <<-EOF
               #!/bin/bash
+              wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.13/jenkins-plugin-manager-2.12.13.jar 
+              java -jar jenkins-plugin-manager-2.12.13.jar --plugin-file=/usr/share/jenkins/plugins.txt --war=/usr/share/java/jenkins.war
+              sudo cp -fR /usr/share/jenkins/ref/plugins/  /var/lib/jenkins/
               sudo systemctl enable jenkins
               sudo systemctl start jenkins
               sudo mv /etc/caddy/Caddyfile /opt/
