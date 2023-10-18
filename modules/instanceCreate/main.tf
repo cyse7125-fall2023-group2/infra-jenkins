@@ -26,6 +26,9 @@ resource "aws_instance" "jenkins_server" {
               sudo cp -fR /usr/share/jenkins/ref/plugins/  /var/lib/jenkins/
               sudo systemctl enable jenkins
               sudo systemctl start jenkins
+              sudo systemctl stop jenkins
+              sudo systemctl daemon-reload
+              sudo systemctl start jenkins
               sudo mv /etc/caddy/Caddyfile /opt/
               sudo touch /etc/caddy/Caddyfile
               sudo chown -R root:ubuntu /etc/caddy/Caddyfile 
