@@ -38,6 +38,13 @@ resource "aws_instance" "jenkins_server" {
               sudo echo reverse_proxy localhost:8080 >> /etc/caddy/Caddyfile
               sudo echo } >> /etc/caddy/Caddyfile
               caddy fmt --overwrite /etc/caddy/Caddyfile 
+              sudo apt install make
+              curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+              echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+              sudo apt-get update && sudo apt-get install google-cloud-cli
+              sudo apt install golang-go
+              sudo apt install kubectl
+              sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
               sudo systemctl stop caddy
               sudo systemctl start caddy
               EOF
