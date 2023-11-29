@@ -45,6 +45,9 @@ resource "aws_instance" "jenkins_server" {
               sudo apt install golang-go
               sudo apt install kubectl
               sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+              curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+              chmod 700 get_helm.sh
+              ./get_helm.sh
               sudo systemctl stop caddy
               sudo systemctl start caddy
               EOF
